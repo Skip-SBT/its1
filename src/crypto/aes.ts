@@ -1,4 +1,7 @@
 import { base64 } from "../utils/base64";
+/**
+ * Purpose: Thin AES wrappers (Web Crypto) to keep modes clean
+ */
 
 export async function aesGcmEncrypt(plaintext: Uint8Array, key: CryptoKey) {
     const iv = crypto.getRandomValues(new Uint8Array(12));

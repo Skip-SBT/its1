@@ -7,6 +7,22 @@ import { parseContainer } from "./container";
 import { verifyHmacTag } from "./hmac";
 import { IntegrityError } from "../types/errors";
 
+/**
+ * Purpose: High-level decryption orchestration (what the UI calls).
+ *
+ * Function:
+ *  - decryptFileBlob(blob, passphrase)
+ *      Steps:
+ *       1) Parse container; read header and ciphertext (and mac, if present).
+ *       2) Re-derive keys via PBKDF2 using header.kdf.saltBase64.
+ *       3) If header.hasMac → verify HMAC over MAGIC||len||header||ciphertext.
+ *          - If mismatch → throw IntegrityError.
+ *       4) Decrypt:
+ *          - GCM → AEAD verify inside decrypt() (throws on tamper/wrong key).
+ *          - CBC → decrypt → PKCS#7 unpad.
+ *       5) Return { fileName, data:Uint8Array } for download.
+ */
+
 export async function decryptFileBlob(blob: Blob, passphrase: string) {
     const bytes = new Uint8Array(await blob.arrayBuffer());
     const { header, ciphertext, macBytes } = parseContainer(bytes);

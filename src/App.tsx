@@ -7,6 +7,17 @@ import { useEncryptor } from "./hooks/useEncryptor";
 import { downloadBlob } from "./utils/download";
 import type { AesMode } from "./types/crypto";
 
+/**
+ * Purpose: Presentation layer (UI) for the AES file encrypt/decrypt tool.
+ *
+ * Summary:
+ *  - Users select a file, choose an AES mode (GCM or CBC), and enter a passphrase.
+ *  - On Encrypt:
+ *      PBKDF2 derives keys → (GCM: AEAD encrypt) or (CBC: PKCS#7 pad → encrypt → HMAC) → package .aespack → download.
+ *  - On Decrypt:
+ *      Parse .aespack → PBKDF2 re-derive → verify HMAC if present → decrypt (GCM/CBC) → unpad (CBC) → download original.
+ */
+
 export default function App() {
     const [file, setFile] = React.useState<File | null>(null);
     const [mode, setMode] = React.useState<AesMode>("AES-GCM");

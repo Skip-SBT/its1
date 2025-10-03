@@ -1,7 +1,7 @@
 export const HMAC_TAG_BYTES = 32; // SHA-256 output size in bytes
 
 /**
- * Compute HMAC-SHA-256 tag over arbitrary data using a Web Crypto HMAC key.
+ *  Purpose: Encapsulate HMAC-SHA-256 tag computation and verification.
  */
 export async function computeHmacTag(
     data: ArrayBuffer | Uint8Array,

@@ -7,6 +7,20 @@ import { aesGcmEncrypt, aesCbcEncrypt } from "./aes";
 import { computeHmacTag } from "./hmac";
 import { packageContainer } from "./container";
 
+/**
+ * Purpose: High-level encryption orchestration (what the UI calls).
+ *
+ * Function:
+ *  - encryptFileBlob(file, passphrase, mode)
+ *      Steps:
+ *       1) Read file → Uint8Array.
+ *       2) Generate salt; derive AES/HMAC keys via PBKDF2.
+ *       3) If GCM → encrypt (AEAD); build header; package container (no HMAC).
+ *          If CBC → PKCS#7 pad; encrypt; build header; compute HMAC over
+ *                  MAGIC||len||header||ciphertext; package container.
+ *      Output: Blob (.aespack) for download.
+ */
+
 export async function encryptFileBlob(file: File, passphrase: string, mode: AesMode): Promise<Blob> {
     const plaintext = new Uint8Array(await file.arrayBuffer());
     const salt = crypto.getRandomValues(new Uint8Array(16));

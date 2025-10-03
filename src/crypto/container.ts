@@ -3,6 +3,14 @@ import { FILE_MAGIC, encoder, decoder, uint32BE, concatBuffers, constantTimeEqua
 import { HMAC_TAG_BYTES } from "./hmac";
 import { FormatError } from "../types/errors";
 
+/**
+ * Purpose: Self-contained .aespack container read/write (format boundary).
+ *
+ * Guarantees:
+ *  - Validates magic and minimum structure.
+ *  - Leaves integrity/auth decisions to HMAC/AEAD layers.
+ */
+
 export function packageContainer(header: ContainerHeader, ciphertext: ArrayBuffer, mac?: ArrayBuffer) {
     const headerBytes = encoder.encode(JSON.stringify(header));
     const core = concatBuffers(FILE_MAGIC, uint32BE(headerBytes.byteLength), headerBytes, ciphertext);

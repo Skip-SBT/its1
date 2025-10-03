@@ -1,3 +1,7 @@
+/**
+ * Purpose: Derive encryption and MAC keys from the user passphrase (PBKDF2).
+ */
+
 export async function deriveEncryptionAndMacKeys(passphrase: string, saltBytes: Uint8Array) {
     const te = new TextEncoder();
     const passphraseKey = await crypto.subtle.importKey("raw", te.encode(passphrase), "PBKDF2", false, ["deriveBits"]);

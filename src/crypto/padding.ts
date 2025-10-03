@@ -1,5 +1,12 @@
 import { PaddingError } from "../types/errors";
 
+/**
+ * Purpose: PKCS#7 padding for AES-CBC (WebCrypto doesn't add/remove it for us).
+ *
+ * Exports:
+ *  - pkcs7.pad(plaintextU8): ensures length is a multiple of 16 (adds full block if already aligned).
+ *  - pkcs7.unpad(paddedU8): validates and removes PKCS#7 bytes.
+ */
 export const pkcs7 = {
     pad: (data: Uint8Array) => {
         const block = 16;
