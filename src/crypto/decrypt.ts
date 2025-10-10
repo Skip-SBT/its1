@@ -30,7 +30,7 @@ export async function decryptFileBlob(blob: Blob, passphrase: string) {
     const {
         aesGcmKey,
         aesCbcKey,
-        hmacKey
+        hmacKey,
     } = await deriveEncryptionAndMacKeys(passphrase, base64.decode(header.kdf.saltBase64));
 
     if (header.hasMac) {

@@ -16,7 +16,7 @@ const HiddenInput = styled("input")({
     whiteSpace: "nowrap",
     width: 1,
 });
-
+//eslint
 type Props = {
     file: File | null;
     onFile: (f: File | null) => void;

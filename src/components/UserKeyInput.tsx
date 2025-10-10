@@ -1,5 +1,5 @@
 import React from "react";
-import {TextField, InputAdornment, IconButton, Tooltip, LinearProgress, Box} from "@mui/material";
+import {Box, IconButton, InputAdornment, TextField, Tooltip} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 type Props = {

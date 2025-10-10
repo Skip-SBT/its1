@@ -8,7 +8,7 @@ export async function deriveEncryptionAndMacKeys(passphrase: string, saltBytes: 
     const bits = await crypto.subtle.deriveBits(
         {name: "PBKDF2", salt: saltBytes, iterations: 250_000, hash: "SHA-256"},
         passphraseKey,
-        512
+        512,
     );
     const derived = new Uint8Array(bits);
     const aesKeyBytes = derived.slice(0, 32);
@@ -19,7 +19,7 @@ export async function deriveEncryptionAndMacKeys(passphrase: string, saltBytes: 
         aesCbcKey: await crypto.subtle.importKey("raw", aesKeyBytes, "AES-CBC", false, ["encrypt", "decrypt"]),
         hmacKey: await crypto.subtle.importKey("raw", hmacKeyBytes, {
             name: "HMAC",
-            hash: "SHA-256"
+            hash: "SHA-256",
         }, false, ["sign", "verify"]),
     };
 }

@@ -30,14 +30,14 @@ export async function encryptFileBlob(file: File, passphrase: string, mode: AesM
         name: "PBKDF2" as const,
         hash: "SHA-256" as const,
         iterations: 250000,
-        saltBase64: base64.encode(salt)
+        saltBase64: base64.encode(salt),
     };
     const common = {
         version: FORMAT_VERSION,
         originalFileName: file.name,
         originalFileSize: plaintext.byteLength,
         mode,
-        kdf
+        kdf,
     };
 
     if (mode === "AES-GCM") {
@@ -57,7 +57,7 @@ export async function encryptFileBlob(file: File, passphrase: string, mode: AesM
         new TextEncoder().encode("AESPACK"),
         uint32BE(headerBytes.byteLength),
         headerBytes,
-        ciphertext
+        ciphertext,
     );
 
     const mac = await computeHmacTag(authCore, hmacKey);

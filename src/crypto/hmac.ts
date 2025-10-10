@@ -5,7 +5,7 @@ export const HMAC_TAG_BYTES = 32; // SHA-256 output size in bytes
  */
 export async function computeHmacTag(
     data: ArrayBuffer | Uint8Array,
-    hmacKey: CryptoKey
+    hmacKey: CryptoKey,
 ): Promise<Uint8Array> {
     const buf = data instanceof Uint8Array ? data : new Uint8Array(data);
     const tag = await crypto.subtle.sign("HMAC", hmacKey, buf);
@@ -19,7 +19,7 @@ export async function computeHmacTag(
 export async function verifyHmacTag(
     expectedTag: ArrayBuffer | Uint8Array,
     data: ArrayBuffer | Uint8Array,
-    hmacKey: CryptoKey
+    hmacKey: CryptoKey,
 ): Promise<boolean> {
     const tag = expectedTag instanceof Uint8Array ? expectedTag : new Uint8Array(expectedTag);
     const buf = data instanceof Uint8Array ? data : new Uint8Array(data);
