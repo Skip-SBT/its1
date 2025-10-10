@@ -1,4 +1,4 @@
-import { PaddingError } from "../types/errors";
+import {PaddingError} from "../types/errors";
 
 /**
  * Purpose: PKCS#7 padding for AES-CBC (WebCrypto doesn't add/remove it for us).
