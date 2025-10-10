@@ -1,9 +1,9 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
+import {styled} from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { Box, Typography } from "@mui/material";
+import {Box, Typography} from "@mui/material";
 
 const HiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -22,15 +22,15 @@ type Props = {
     onFile: (f: File | null) => void;
 };
 
-export default function FileUpload({ file, onFile }: Props) {
+export default function FileUpload({file, onFile}: Props) {
     return (
-        <Box sx={{ m: 2 }}>
+        <Box sx={{m: 2}}>
             <Button
                 fullWidth
                 component="label"
                 role={undefined}
                 variant="contained"
-                startIcon={<CloudUploadIcon />}
+                startIcon={<CloudUploadIcon/>}
             >
                 {file ? "Replace file" : "Choose file"}
                 <HiddenInput
@@ -39,11 +39,11 @@ export default function FileUpload({ file, onFile }: Props) {
                 />
             </Button>
             {file && (
-                <Box sx={{ mt: 1, display: "flex", alignItems: "center", gap: 2 }}>
+                <Box sx={{mt: 1, display: "flex", alignItems: "center", gap: 2}}>
                     <Typography variant="body2">
                         Selected: <strong>{file.name}</strong> ({file.size.toLocaleString()} bytes)
                     </Typography>
-                    <Button size="small" variant="text" startIcon={<DeleteOutlineIcon />} onClick={() => onFile(null)}>
+                    <Button size="small" variant="text" startIcon={<DeleteOutlineIcon/>} onClick={() => onFile(null)}>
                         Clear
                     </Button>
                 </Box>

@@ -1,7 +1,7 @@
-import { ContainerHeader } from "../types/crypto";
-import { FILE_MAGIC, encoder, decoder, uint32BE, concatBuffers, constantTimeEqual } from "../utils/buffers";
-import { HMAC_TAG_BYTES } from "./hmac";
-import { FormatError } from "../types/errors";
+import {ContainerHeader} from "../types/crypto";
+import {FILE_MAGIC, encoder, decoder, uint32BE, concatBuffers, constantTimeEqual} from "../utils/buffers";
+import {HMAC_TAG_BYTES} from "./hmac";
+import {FormatError} from "../types/errors";
 
 /**
  * Purpose: Self-contained .aespack container read/write (format boundary).
@@ -14,7 +14,7 @@ import { FormatError } from "../types/errors";
 export function packageContainer(header: ContainerHeader, ciphertext: ArrayBuffer, mac?: ArrayBuffer) {
     const headerBytes = encoder.encode(JSON.stringify(header));
     const core = concatBuffers(FILE_MAGIC, uint32BE(headerBytes.byteLength), headerBytes, ciphertext);
-    return new Blob([mac ? concatBuffers(core, mac) : core], { type: "application/octet-stream" });
+    return new Blob([mac ? concatBuffers(core, mac) : core], {type: "application/octet-stream"});
 }
 
 export function parseContainer(data: Uint8Array) {
@@ -34,5 +34,5 @@ export function parseContainer(data: Uint8Array) {
     const ciphertext = data.slice(headerEnd, data.byteLength - macLength);
     const macBytes = macLength ? data.slice(data.byteLength - macLength) : null;
 
-    return { header, ciphertext, macBytes };
+    return {header, ciphertext, macBytes};
 }

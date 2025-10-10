@@ -14,7 +14,10 @@ export const concatBuffers = (...buffers: (ArrayBuffer | Uint8Array)[]) => {
     const arrays = buffers.map(b => b instanceof Uint8Array ? b : new Uint8Array(b));
     const out = new Uint8Array(arrays.reduce((n, a) => n + a.byteLength, 0));
     let off = 0;
-    for (const a of arrays) { out.set(a, off); off += a.byteLength; }
+    for (const a of arrays) {
+        out.set(a, off);
+        off += a.byteLength;
+    }
     return out.buffer;
 };
 
