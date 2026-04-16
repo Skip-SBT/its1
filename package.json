@@ -1,5 +1,5 @@
 {
-  "homepage": "https://<GITHUB_NAME>.github.io/<REPO_NAME>",
+  "homepage": "https://skip-sbt.github.io/its1",
   "name": "project-name",
   "version": "1.0.0",
   "private": true,
@@ -34,8 +34,8 @@
     "check:spellcheck": "gulp spellcheck",
     "check:all": "gulp check:all",
     "reset": "gulp reset",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "predeploy": "npx webpack --mode=production --config webpack.config.js",
+    "deploy": "gh-pages -d dist",
     "bump-version": "gulp bump-version"
   },
   "eslintConfig": {
