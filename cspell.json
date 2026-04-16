@@ -54,6 +54,11 @@
     "typescript"
   ],
   "words": [
+    "aespack",
+    "AEAD",
+    "HMAC",
+    "PBKDF2",
+    "PKCS",
     "TTFB"
   ]
 }

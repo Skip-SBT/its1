@@ -42,9 +42,13 @@ export default function App() {
 
     return (
         <Container maxWidth="md" sx={{ py: 4 }}>
-            <Typography variant="h4" gutterBottom>AES File Encryptor / Decryptor</Typography>
+            <Typography variant="h4" gutterBottom>AESPack</Typography>
+            <Typography variant="subtitle1" gutterBottom>Browser-Based AES File Encryptor / Decryptor</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                AES-GCM (authenticated) or AES-CBC + HMAC. PBKDF2 (250k iterations + salt). Portable .aespack.
+                Encrypt and decrypt any file entirely in your browser — no data ever leaves your device.
+                Choose between <strong>AES-GCM</strong> (authenticated encryption) or <strong>AES-CBC&nbsp;+&nbsp;HMAC-SHA256</strong> (encrypt-then-MAC),
+                with keys derived via <strong>PBKDF2</strong> (250 000 iterations, random salt).
+                The result is a portable <code>.aespack</code> file containing the IV, salt, ciphertext, and authentication tag.
             </Typography>
 
             <EncryptionDropdown mode={mode} onChange={setMode} />

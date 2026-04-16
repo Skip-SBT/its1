@@ -1,6 +1,6 @@
 {
-  "homepage": "https://skip-sbt.github.io/its1",
-  "name": "project-name",
+  "homepage": "https://skip-sbt.github.io/AESPack",
+  "name": "aespack",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
